@@ -47,5 +47,24 @@ cp snort-$(SNORT_VER)/etc/*.map* /etc/snort/
 cp /etc/snort/snort.conf /etc/snort/snort.conf_orig
 
 
-sed -i 's/include \$RULE\_PATH/\#include \$RULE\_PATH/' /etc/snort/snort.conf
+echo "##################################################################"
+echo "# setting  /etc/snort/snort.conf                                 #"
+echo "##################################################################"
 
+sed -i 's/include \$RULE\_PATH/\#include \$RULE\_PATH/' /etc/snort/snort.conf
+sed -i 's/\#include \$RULE_PATH\/local\.rules/\include \$RULE_PATH\/local\.rules/' /etc/snort/snort.conf
+
+sed -i 's/var RULE_PATH \.\.\/rules/var RULE_PATH \/etc\/snort\/rules/' /etc/snort/snort.conf
+sed -i 's/var SO_RULE_PATH \.\.\/so_rules/var SO_RULE_PATH \/etc\/snort\/so_rules/' /etc/snort/snort.conf
+sed -i 's/var PREPROC_RULE_PATH \.\.\/preproc_rules/var PREPROC_RULE_PATH \/etc\/snort\/preproc_rules/' /etc/snort/snort.conf
+sed -i 's/var WHITE_LIST_PATH \.\.\/rules/var WHITE_LIST_PATH \/etc\/snort\/rules\/white_list.rules/' /etc/snort/snort.conf
+sed -i 's/var BLACK_LIST_PATH \.\.\/rules/var BLACK_LIST_PATH \/etc\/snort\/rules\/black_list.rules/' /etc/snort/snort.conf
+
+sed -i 's/whitelist \$WHITE_LIST_PATH\/white_list\.rules\, /\#whitelist \$WHITE_LIST_PATH\/white_list\.rules\,/' /etc/snort/snort.conf
+sed -i 's/blacklist \$BLACK_LIST_PATH\/black_list\.rules/#blacklist \$BLACK_LIST_PATH\/black_list\.rules/' /etc/snort/snort.conf
+
+
+
+echo "##################################################################"
+echo "# Modify /etc/apache2/mods-enabled/dir.conf -> index.php enable  #"
+echo "##################################################################"
